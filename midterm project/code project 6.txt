@@ -1,0 +1,100 @@
+#define ledPin 22
+#define servoPin 23
+#define buzzerPin 24
+#define relePin 25
+
+#include <Servo.h>
+
+Servo servo;
+String enter = "";
+int value;
+boolean led = false;
+int num = 1500;
+
+
+void setup(){
+  
+  Serial.begin(9600);
+  servo.attach(servoPin);
+  servo.writeMicroseconds(num);
+
+  pinMode(ledPin, OUTPUT);
+  pinMode(servoPin, OUTPUT);
+  pinMode(buzzerPin, OUTPUT);
+  pinMode(relePin, OUTPUT);
+}
+
+
+void loop(){
+
+ 
+  if (Serial.available() > 0) {
+
+    int key = Serial.read() - 48;
+
+
+    // BUZZER
+    // ASCII code of 'b' is 98 
+    if( key == 50){
+      Serial.println("Buzzer ");
+      digitalWrite(buzzerPin, HIGH);
+      delay(100);
+      digitalWrite(buzzerPin, LOW);
+
+
+    // LED
+    // ASCII code of 'l' is 108 
+    }else if (key == 60){
+    Serial.println("LED ");
+    led = !led;
+    if(led)
+        digitalWrite(ledPin, HIGH);
+    else
+        digitalWrite(ledPin, LOW);
+
+
+    // RELE
+    // ASCII code of 't' is 116 
+    }else if (key == 68){
+    Serial.println("Rear ON ");
+    digitalWrite(relePin, HIGH);
+
+
+    // RELE
+    // ASCII code of 'f' is 102 
+    }else if (key == 54){
+    Serial.println("Rear OFF ");
+    digitalWrite(relePin, LOW);
+
+
+    // ASCII code of "ENTER" is 13
+    }else if (key == -35){
+      value = enter.toInt();
+
+      Serial.write(' ');
+      Serial.print(value);
+      Serial.write(' ');
+      num =  1500 + ((value / 180.0) * 500);
+      if(value < 180 )
+        servo.writeMicroseconds(num);
+      else{
+        num = 1500 - (((value - 180) / 180.0) * 500);
+        servo.writeMicroseconds(num);
+        }
+
+
+    // CLEAR
+    // ASCII code of . is 50
+    }else if (key == -2) {
+      enter = "";
+      Serial.write(' ');
+      Serial.println("clear");
+
+
+    // OTHER KEY
+    }else {
+      enter += key;
+    }
+
+  }
+}

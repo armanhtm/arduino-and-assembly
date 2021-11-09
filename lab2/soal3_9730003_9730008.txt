@@ -1,0 +1,153 @@
+#include <Keypad.h>
+
+const byte ROWS = 4; 
+const byte COLS = 3; 
+char keys[ROWS][COLS] = {
+  {'1','2','3'},
+  {'4','5','6'},
+  {'7','8','9'},
+  {'#','0','*'}
+};
+
+byte rowPins[ROWS] = {29, 31, 33, 35}; 
+byte colPins[COLS] = {27, 25, 23}; 
+
+Keypad keypad = Keypad( makeKeymap(keys), rowPins, colPins, ROWS, COLS );
+
+void setup(){
+  Serial.begin(9600);
+  pinMode(A0, OUTPUT);
+  pinMode(A1, OUTPUT);
+  pinMode(A2, OUTPUT);
+  pinMode(A3, OUTPUT);
+  pinMode(A4, OUTPUT);
+  pinMode(A5, OUTPUT);
+  pinMode(A6, OUTPUT);
+  pinMode(A7, OUTPUT);
+  pinMode(A8, OUTPUT);
+}
+
+void loop(){
+  char key = keypad.getKey();
+  
+
+   int terminal = Serial.parseInt();
+
+
+   if(terminal>=10)
+      Serial.println("invalid");
+
+  
+   
+  if (key == '1' || terminal == 1){
+    digitalWrite(A0, HIGH);
+  }
+  else if(key == '2' || terminal == 2) {
+    digitalWrite(A0, HIGH);
+    delay(300);
+    digitalWrite(A1, HIGH);
+  }
+   else if(key == '3' || terminal == 3) {
+    digitalWrite(A0, HIGH);
+    delay(300);
+    digitalWrite(A1, HIGH);
+    delay(300);
+    digitalWrite(A2, HIGH);
+  }
+   else if(key == '4' || terminal == 4) {
+    digitalWrite(A0, HIGH);
+    delay(300);
+    digitalWrite(A1, HIGH);
+    delay(300);
+    digitalWrite(A2, HIGH);
+    delay(300);
+    digitalWrite(A3, HIGH);
+  }
+   else if(key == '5' || terminal == 5) {
+    digitalWrite(A0, HIGH);
+    delay(300);
+    digitalWrite(A1, HIGH);
+    delay(300);
+    digitalWrite(A2, HIGH);
+    delay(300);
+    digitalWrite(A3, HIGH);
+    delay(300);
+    digitalWrite(A7, HIGH);
+  }
+   else if(key == '6' || terminal == 6) {
+    digitalWrite(A0, HIGH);
+    delay(300);
+    digitalWrite(A1, HIGH);
+    delay(300);
+    digitalWrite(A2, HIGH);
+    delay(300);
+    digitalWrite(A3, HIGH);
+    delay(300);
+    digitalWrite(A7, HIGH);
+    delay(300);
+    digitalWrite(A6, HIGH);
+  }
+   else if(key == '7' || terminal == 7) {
+    digitalWrite(A0, HIGH);
+    delay(300);
+    digitalWrite(A1, HIGH);
+    delay(300);
+    digitalWrite(A2, HIGH);
+    delay(300);
+    digitalWrite(A3, HIGH);
+    delay(300);
+    digitalWrite(A7, HIGH);
+    delay(300);
+    digitalWrite(A6, HIGH);
+    delay(300);
+    digitalWrite(A5, HIGH);
+  }
+   else if(key == '8' || terminal == 8) {
+    digitalWrite(A0, HIGH);
+    delay(300);
+    digitalWrite(A1, HIGH);
+    delay(300);
+    digitalWrite(A2, HIGH);
+    delay(300);
+    digitalWrite(A3, HIGH);
+    delay(300);
+    digitalWrite(A7, HIGH);
+    delay(300);
+    digitalWrite(A6, HIGH);
+    delay(300);
+    digitalWrite(A5, HIGH);
+    delay(300);
+    digitalWrite(A4, HIGH);
+  }
+   else if(key == '9' || terminal == 9) {
+    digitalWrite(A0, HIGH);
+    delay(300);
+    digitalWrite(A1, HIGH);
+    delay(300);
+    digitalWrite(A2, HIGH);
+    delay(300);
+    digitalWrite(A3, HIGH);
+    delay(300);
+    digitalWrite(A7, HIGH);
+    delay(300);
+    digitalWrite(A6, HIGH);
+    delay(300);
+    digitalWrite(A5, HIGH);
+    delay(300);
+    digitalWrite(A4, HIGH);
+    delay(300);
+    digitalWrite(A8, HIGH);
+  }
+   else if(key == '0' || terminal == 0) {
+    digitalWrite(A0, LOW);
+    digitalWrite(A1, LOW);
+    digitalWrite(A2, LOW);
+    digitalWrite(A3, LOW);
+    digitalWrite(A7, LOW);
+    digitalWrite(A6, LOW);
+    digitalWrite(A5, LOW);
+    digitalWrite(A4, LOW);
+    digitalWrite(A8, LOW);
+  }
+  
+}
